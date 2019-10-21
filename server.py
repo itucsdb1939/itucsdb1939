@@ -9,7 +9,6 @@ DB_USER = "afoeiapd"
 DB_PASS = "3N1LWGKtLZAdeI2sEQQR4N0I6GE1EnOM"
 DB_HOST = "salt.db.elephantsql.com"
 DB_PORT = "5432"
-app.config['SECRET_KEY'] = 'f5b9ac4eddb1942feeb7d826b76b4a3f'
 
 def CDB():
     try:
@@ -35,15 +34,16 @@ def home():
 def register():
     form = RegistrationForm()
     if (request.method =='POST'):
-        try:         
-            cur.execute("INSERT INTO person (tc,first_name,last_name,email,phone,pass) VALUES ('{tc}','{fn}','{ln}','{mail}','{ph}','{passw}');".format(tc = request.form['tc'], fn = request.form['first_name'], ln = request.form['last_name'], mail = request.form['e_mail'], ph = request.form['phone'], passw = request.form['password']))
-            return render_template("home_dr.html")
-        except:
-            return render_template("home.html")
+        if form.validate_on_submit():
+            try:         
+                cur.execute(f"INSERT INTO person (tc,first_name,last_name,email,phone,pass) VALUES ('{request.form['tc']}','{request.form['first_name']}','{request.form['last_name']}','{request.form['e_mail']}','{request.form['phone']}','{request.form['password']}');")
+                return render_template("home_dr.html")
+            except:
+                return render_template("home.html")
+            flash(f'hey {form.first_name.data}', 'success')
+            return redirect(url_for('home_dr'))
+        
     conn.commit()
-    if form.validate_on_submit():
-        flash(f'hey {form.first_name.data}', 'success')
-        return redirect(url_for('home_dr'))
     return render_template("register.html", form = form)
 
 @app.route("/register_dr", methods=['GET', 'POST'])
@@ -144,5 +144,7 @@ def login_nr():
     return render_template("login_nurse.html", form = form)
 
 
-if __name__ == "__main__":
-    app.run()
+if __name__ == '__main__':
+    app.run(debug = True)
+
+####randevu zamanınaunique constraint koy
