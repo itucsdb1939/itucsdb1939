@@ -4,10 +4,10 @@ import psycopg2
 app = Flask(__name__)
 
 
-DB_NAME = "afoeiapd"
-DB_USER = "afoeiapd"
-DB_PASS = "3N1LWGKtLZAdeI2sEQQR4N0I6GE1EnOM"
-DB_HOST = "salt.db.elephantsql.com"
+DB_NAME = "postgres"
+DB_USER = "postgres"
+DB_PASS = "docker"
+DB_HOST = "localhost"
 DB_PORT = "5432"
 app.config['SECRET_KEY'] = 'f5b9ac4eddb1942feeb7d826b76b4a3f'
 def CDB():
