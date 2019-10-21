@@ -4,10 +4,10 @@ import psycopg2
 app = Flask(__name__)
 
 
-DB_NAME = "afoeiapd"
-DB_USER = "afoeiapd"
-DB_PASS = "3N1LWGKtLZAdeI2sEQQR4N0I6GE1EnOM"
-DB_HOST = "salt.db.elephantsql.com"
+DB_NAME = "dbjrtdrqa9jsc6"
+DB_USER = "afxpitnfwcxnoy"
+DB_PASS = "4b83fbb00a008227350fee5f8be5f9dc24cd148418e58fa92755aa060998ec72"
+DB_HOST = "ec2-54-235-96-48.compute-1.amazonaws.com"
 DB_PORT = "5432"
 
 def CDB():
