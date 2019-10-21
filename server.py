@@ -4,12 +4,12 @@ import psycopg2
 app = Flask(__name__)
 
 
-DB_NAME = "dbjrtdrqa9jsc6"
-DB_USER = "afxpitnfwcxnoy"
-DB_PASS = "4b83fbb00a008227350fee5f8be5f9dc24cd148418e58fa92755aa060998ec72"
-DB_HOST = "ec2-54-235-96-48.compute-1.amazonaws.com"
+DB_NAME = "afoeiapd"
+DB_USER = "afoeiapd"
+DB_PASS = "3N1LWGKtLZAdeI2sEQQR4N0I6GE1EnOM"
+DB_HOST = "salt.db.elephantsql.com"
 DB_PORT = "5432"
-
+app.config['SECRET_KEY'] = 'f5b9ac4eddb1942feeb7d826b76b4a3f'
 def CDB():
     try:
         connection = psycopg2.connect(dbname = DB_NAME, user = DB_USER, password = DB_PASS, host = DB_HOST, port = DB_PORT)
@@ -36,7 +36,7 @@ def register():
     if (request.method =='POST'):
         if form.validate_on_submit():
             try:         
-                cur.execute(f"INSERT INTO person (tc,first_name,last_name,email,phone,pass) VALUES ('{request.form['tc']}','{request.form['first_name']}','{request.form['last_name']}','{request.form['e_mail']}','{request.form['phone']}','{request.form['password']}');")
+                cur.execute(f"INSERT INTO person (tc,first_name,last_name,email,phone,pass) VALUES ('{form.tc.data}','{form.first_name.data}','{form.last_name.data}','{form.email.data}','{form.phone.data}','{form.password.data}');")
                 return render_template("home_dr.html")
             except:
                 return render_template("home.html")
@@ -50,16 +50,16 @@ def register():
 def register_dr():
     form = RegistrationFormD()
     if (request.method =='POST'):
-        tc = request.form['tc']
-        if(tc == 12345678900):
-            return render_template("login.html")
-        """
-        try:
-            cur.execute("INSERT INTO doctor (tc,first_name,last_name,email,phone,room,dep,pass) VALUES ('{tc}','{fn}','{ln}','{mail}','{ph}','{room}','{dep}','{passw}');".format(tc = request.form['tc'],fn = request.form['first_name'],ln = request.form['last_name'],mail = request.form['e_mail'],ph = request.form['phone'],room = request.form['room'],dep = request.form['department'], passw =request.form['password']))
-        except:
-            return render_template("home.html")
-        """
-    
+        if form.validate_on_submit():
+            try:         
+                cur.execute(f"INSERT INTO person (tc,first_name,last_name,email,phone,pass) VALUES ('{form.tc.data}','{form.first_name.data}','{form.last_name.data}','{form.email.data}','{form.phone.data}','{form.room.data}','{form.department.data}','{form.password.data}');")
+                return render_template("home_dr.html")
+            except:
+                return render_template("home.html")
+            flash(f'hey {form.first_name.data}', 'success')
+            return redirect(url_for('home_dr'))
+        
+    conn.commit()
     return render_template("register_dr.html", form = form)
 
 @app.route("/register_nr", methods=['GET', 'POST'])
