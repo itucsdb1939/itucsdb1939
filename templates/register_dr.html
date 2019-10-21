@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous">
+
+        <title>HOME</title>
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <a class="navbar-brand" href="home">MHRSAM</a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+        
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="home">Home
+                                    <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login">Login</a>
+                            </li>
+                            
+                            <li class="nav-item justify-content-end">
+                                <a class="nav-link " href="register">Sign Up</a>
+                            </li>
+                        </ul>
+                        <nav class="navbar navbar-dark bg-dark justify-content-end">
+                                <form class="form-inline">
+                                  
+                                  <a class="nav-link" href="login"><button class="btn btn-secondary" type="button">Login</button></a>
+                                  
+                                  <a class="nav-link " href="register"><button class="btn btn-secondary" type="button">Sign Up</button></a>
+                                  
+                                </form>
+                              </nav>
+                    </div>
+                </nav>
+            <div class="jumbotron" style = "margin-right:20%;margin-left:20%;margin-top:5%;margin-bottom:5%;">
+                    <div>
+                            <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                      <a class="nav-link " href="register">Patient</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link active" href="register_dr">Doctor</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="nav-link " href="register_nr">Nurse</a>
+                                    </li>
+                                  </ul>
+                    </div>
+                <h1 class="display-5" style = "margin-bottom: 3%;margin-top:2%;">Sign Up</h1>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <div class="form-group">
+                            {{ form.tc.label(class="form-control-label") }}
+
+                            {% if form.tc.errors %}
+                                {{ form.tc(class="form-control form-control-lg is-invalid") }}
+                                <div class = "invalid-feedback">
+                                    {% for error in form.tc.errors %}
+                                        <span>{{  error  }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form.tc(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.first_name.label(class="form-control-label") }}
+                            {% if form.tc.errors %}
+                            {{ form.first_name(class="form-control form-control-lg is-invalid") }}
+                                <div class = "invalid-feedback">
+                                    {% for error in form.first_name.errors %}
+                                        <span>{{  error  }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form.first_name(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.last_name.label(class="form-control-label") }}
+                            {% if form.tc.errors %}
+                            {{ form.last_name(class="form-control form-control-lg is-invalid") }}
+                                <div class = "invalid-feedback">
+                                    {% for error in form.last_name.errors %}
+                                        <span>{{  error  }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form.last_name(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.e_mail.label(class="form-control-label") }}
+                            {% if form.e_mail.errors %}
+                            {{ form.e_mail(class="form-control form-control-lg is-invalid") }}
+                                <div class = "invalid-feedback">
+                                    {% for error in form.e_mail.errors %}
+                                        <span>{{  error  }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form.e_mail(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                                {{ form.room.label(class="form-control-label") }}
+                                {% if form.room.errors %}
+                                {{ form.room(class="form-control form-control-lg is-invalid") }}
+                                    <div class = "invalid-feedback">
+                                        {% for error in form.room.errors %}
+                                            <span>{{  error  }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                        {{ form.room(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                    {{ form.department.label(class="form-control-label") }}
+                                    {% if form.department.errors %}
+                                    {{ form.department(class="form-control form-control-lg is-invalid") }}
+                                        <div class = "invalid-feedback">
+                                            {% for error in form.department.errors %}
+                                                <span>{{  error  }}</span>
+                                            {% endfor %}
+                                        </div>
+                                        {% else %}
+                                            {{ form.department(class="form-control form-control-lg") }}
+                                    {% endif %}
+                                </div>
+
+                        <div class="form-group">
+                            {{ form.password.label(class="form-control-label") }}
+                            {% if form.password.errors %}
+                            {{ form.password(class="form-control form-control-lg is-invalid") }}
+                                <div class = "invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                        <span>{{  error  }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form.password(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.confirm_password.label(class="form-control-label") }}
+                            {% if form.confirm_password.errors %}
+                            {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                                <div class = "invalid-feedback">
+                                    {% for error in form.confirm_password.errors %}
+                                        <span>{{  error  }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                    {{ form.confirm_password(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
+                </form>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Already have an account?
+                        <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+                    </small>
+                </div>
+            </div>
+
+        </div>
+        <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+                <div class="container text-center">
+                  <small>Copyright &copy; Your Website</small>
+                </div>
+              </footer>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    </body>
+</html>
