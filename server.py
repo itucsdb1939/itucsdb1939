@@ -1,15 +1,17 @@
 from flask import Flask,render_template, flash, redirect, url_for, request
 from forms import RegistrationForm, LoginForm, LoginFormP, RegistrationFormD,Operation
 import psycopg2
+
 app = Flask(__name__)
 
 
-DB_NAME = "postgres"
-DB_USER = "postgres"
-DB_PASS = "docker"
-DB_HOST = "localhost"
+DB_NAME = "afoeiapd"
+DB_USER = "afoeiapd"
+DB_PASS = "3N1LWGKtLZAdeI2sEQQR4N0I6GE1EnOM"
+DB_HOST = "salt.db.elephantsql.com"
 DB_PORT = "5432"
 app.config['SECRET_KEY'] = 'f5b9ac4eddb1942feeb7d826b76b4a3f'
+
 def CDB():
     try:
         connection = psycopg2.connect(dbname = DB_NAME, user = DB_USER, password = DB_PASS, host = DB_HOST, port = DB_PORT)
@@ -18,10 +20,6 @@ def CDB():
         
     except:
         print("FFF")
-
-
-conn = CDB()
-cur = conn.cursor()
 
 
 
@@ -35,15 +33,17 @@ def register():
     form = RegistrationForm()
     if (request.method =='POST'):
         if form.validate_on_submit():
-            try:         
-                cur.execute(f"INSERT INTO person (tc,first_name,last_name,email,phone,pass) VALUES ('{form.tc.data}','{form.first_name.data}','{form.last_name.data}','{form.email.data}','{form.phone.data}','{form.password.data}');")
-                return render_template("home_dr.html")
+            try:
+                conn = CDB()
+                cur = conn.cursor()
+                statement = "INSERT INTO person (tc,first_name,last_name,email,phone,pass) VALUES ('%d','%s','%s','%s','%d','%s');"       
+                cur.execute(statement,int(request.form['tc']),request.form['first_name'],request.form['last_name'],request.form['email'],int(request.form['phone']),request.form['password'])
+                conn.commit()
+                cur.close()
+                conn.close()
+                return redirect(url_for('home_p'))
             except:
-                return render_template("home.html")
-            flash(f'hey {form.first_name.data}', 'success')
-            return redirect(url_for('home_dr'))
-        
-    conn.commit()
+                return redirect(url_for('register'))
     return render_template("register.html", form = form)
 
 @app.route("/register_dr", methods=['GET', 'POST'])
@@ -51,64 +51,79 @@ def register_dr():
     form = RegistrationFormD()
     if (request.method =='POST'):
         if form.validate_on_submit():
-            try:         
-                cur.execute(f"INSERT INTO person (tc,first_name,last_name,email,phone,pass) VALUES ('{form.tc.data}','{form.first_name.data}','{form.last_name.data}','{form.email.data}','{form.phone.data}','{form.room.data}','{form.department.data}','{form.password.data}');")
-                return render_template("home_dr.html")
+            try: 
+                conn = CDB()
+                cur = conn.cursor()
+                statement = "INSERT INTO doctor (tc,first_name,last_name,email,phone,room,dep,pass) VALUES ('%d','%s','%s','%s','%d','%d','%s','%s');"        
+                cur.execute(statement,int(request.form['tc']),request.form['first_name'],request.form['last_name'],request.form['email'],int(request.form['phone']),int(request.form['room']),request.form['department'],request.form['password'])
+                conn.commit()
+                cur.close()
+                conn.close()
+                return redirect(url_for('home_dr'))
             except:
-                return render_template("home.html")
-            flash(f'hey {form.first_name.data}', 'success')
-            return redirect(url_for('home_dr'))
-        
-    conn.commit()
+                return redirect(url_for('home'))
     return render_template("register_dr.html", form = form)
 
 @app.route("/register_nr", methods=['GET', 'POST'])
 def register_nr():
     form = RegistrationForm()
-    if form.validate_on_submit():
-        flash(f'hey {form.first_name.data}', 'success')
-        return redirect(url_for('home_dr'))
+    if (request.method =='POST'):
+        print(form.errors)
+        if form.validate_on_submit():
+            print(form.errors)
+            try:
+                conn = CDB()
+                cur = conn.cursor()
+                statement = "INSERT INTO nurse (tc,first_name,last_name,email,phone,pass) VALUES ('%d','%s','%s','%s','%d','%s');"       
+                cur.execute(statement,int(request.form['tc']),request.form['first_name'],request.form['last_name'],request.form['email'],int(request.form['phone']),request.form['password'])
+                conn.commit()
+                cur.close()
+                conn.close()
+                return redirect(url_for('home_d'))
+            except:
+                return redirect(url_for('home'))
     return render_template("register_nr.html", form = form)
 
 @app.route("/op_dr", methods=['GET', 'POST'])
 def operation():
     form = Operation()
     if (request.method =='POST'):
-        try:
-            cur.execute("""INSERT INTO surgery(patient_id,doctor_id,nurse_id,op_room,date,time)
-            VALUES (%d,%d,%d,%d,%s,%s);
-            """,(form.patient_id.data,form.doctor_id.data,form.nurse_id.data,form.room.data,form.date.data,form.time.data))
-        except:
-            print("error")
-    conn.commit()
-    if form.validate_on_submit():
-        flash(f'hey {form.patient_id.data}', 'success')
-        return redirect(url_for('home_dr'))
+        if form.validate_on_submit():
+            try:
+                conn = CDB()
+                cur = conn.cursor()
+                statement = "INSERT INTO surgery (patient_id,doctor_id,nurse_id,op_room,date,time) VALUES ('%d','%d','%d','%d','%s','%s');"
+                cur.execute(statement,request.form['patient_id'],request.form['doctor_id'],request.form['nurse_id'],request.form['op_room'],request.form['date'],request.form['time'])
+                conn.commit()
+                cur.close()
+                conn.close()
+                flash('Surgery registraton successful.', 'success')
+                return redirect(url_for('operation'))
+            except:
+                print("error")
+                return redirect(url_for('operation'))
     return render_template("op_dr.html", form = form)
 
 @app.route("/op_view", methods=['GET'])
 def op_view():
     try:
+        conn = CDB()
+        cur = conn.cursor()
         cur.execute("SELECT * FROM surgery")
+        result = cur.fetchall()
+        cur.close()
+        conn.close()
     except:
         print("error")
-    result = cur.fetchall()
     return render_template("op_view.html", table = result)
 
 @app.route("/home_dr", methods=['GET', 'POST'])
 def home_dr():
     return render_template("home_dr.html")
 
-
-
-
-
-
-
-
-
-
-
+@app.route("/home_p", methods=['GET', 'POST'])
+def home_p():
+    return render_template("home_p.html")
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -146,5 +161,3 @@ def login_nr():
 
 if __name__ == '__main__':
     app.run(debug = True)
-
-####randevu zamanınaunique constraint koy
