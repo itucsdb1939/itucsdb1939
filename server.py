@@ -158,4 +158,6 @@ def login_nr():
             flash('no login', 'danger')
     return render_template("login_nurse.html", form = form)
 
+if __name__ == '__main__':
+    app.run(debug = True)
 
