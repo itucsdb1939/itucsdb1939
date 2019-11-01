@@ -159,5 +159,3 @@ def login_nr():
     return render_template("login_nurse.html", form = form)
 
 
-if __name__ == '__main__':
-    app.run(debug = True)
