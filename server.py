@@ -4,16 +4,11 @@ import psycopg2
 
 app = Flask(__name__)
 
-DB_NAME = "afoeiapd"
-DB_USER = "afoeiapd"
-DB_PASS = "3N1LWGKtLZAdeI2sEQQR4N0I6GE1EnOM"
-DB_HOST = "salt.db.elephantsql.com"
-DB_PORT = "5432"
 app.config['SECRET_KEY'] = 'f5b9ac4eddb1942feeb7d826b76b4a3f'
 
 def CDB():
     try:
-        connection = psycopg2.connect(dbname = DB_NAME, user = DB_USER, password = DB_PASS, host = DB_HOST, port = DB_PORT)
+        connection = psycopg2.connect(dbname = 'afoeiapd', user = 'afoeiapd', password = '3N1LWGKtLZAdeI2sEQQR4N0I6GE1EnOM', host = 'salt.db.elephantsql.com', port = '5432')
         print("SSS")
         return connection
         
