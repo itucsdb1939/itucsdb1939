@@ -2,8 +2,16 @@ from flask import Flask,render_template, flash, redirect, url_for, request, sess
 from forms import RegistrationForm, LoginForm, LoginFormP, RegistrationFormD,Operation,Appointment
 import psycopg2
 
-app = Flask(__name__)
 
+
+RELEASE = True
+
+if(not RELEASE):
+    environ['DATABASE_URL'] = "postgres://afoeiapd:3N1LWGKtLZAdeI2sEQQR4N0I6GE1EnOM@salt.db.elephantsql.com:5432/afoeiap"
+    initialize(environ.get('DATABASE_URL'))
+    
+    
+app = Flask(__name__)
 app.config['SECRET_KEY'] = 'f5b9ac4eddb1942feeb7d826b76b4a3f'
 
 def CDB():
@@ -221,4 +229,7 @@ def make_appointment():
 
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    if(not RELEASE):
+        app.run(debug=True)
+    else:
+        app.run()
