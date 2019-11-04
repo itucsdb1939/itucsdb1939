@@ -18,6 +18,7 @@
     </head>
     <body>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>
                     <a class="navbar-brand" href="home">MHRSAM</a>
                     <button
                         class="navbar-toggler"
@@ -33,17 +34,29 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="home">Home
+                                <a class="nav-link" href="home_p">Home
                                     <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="op_dr">Surgeries</a>
-                            </li>
-                            
                             <li class="nav-item justify-content-end">
-                                <a class="nav-link " href="#">Patients</a>
+                                    <a class="nav-link " href="prescriptions">Prescriptions</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="blood_test">Blood Test</a>
+                            </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" href="make_appointment">Appointments</a>
+                                </li>
                         </ul>
+                        <nav class="navbar navbar-dark bg-dark justify-content-end">
+                                <form class="form-inline">
+            
+            
+                                    <a class="nav-link " href="sign_out">
+                                        <button class="btn btn-secondary" type="button">Sign Out</button>
+                                    </a>
+            
+                                </form>
+                            </nav>
                         
                     </div>
                 </nav>
@@ -62,28 +75,27 @@
             </div>
             <div class="jumbotron" style="margin-top:10%;margin-bottom:10%;">
                     <div>
-                            <ul class="nav nav-tabs">
-                                    
-                                    <li class="nav-item">
-                                      <a class="nav-link active" href="#">Prescriptions</a>
-                                    </li>
-                                  </ul>
+                            <h1>Prescriptions</h1>
                     </div>
                     
                     <table class="table table-hover" style = "margin-top:5%;">
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Person</th>
-                            <th scope="col">Pill</th>
+                            <th scope="col">Doctor</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Expiration Date</th>
+                            <th scope="col">Diagnosis</th>
+                            <th scope="col">Pills</th>
                           </tr>
                         </thead>
                         <tbody>
                             {% for t in table %}
                                 <tr>
-                                    <td scope="col">{{t[0]}}</td>
-                                    <td scope="col">{{t[1]}}</td>
-                                    <td scope="col">{{t[2]}}</td>
+                                    <td scope="col">{{dr}}</td>
+                                    <td scope="col">{{t[4]}}</td>
+                                    <td scope="col">{{t[5]}}</td>
+                                    <td scope="col">{{t[7]}}</td>
+                                    <td scope="col">{{t[6]}}</td>
                                 </tr>
                             {% endfor %}
                           

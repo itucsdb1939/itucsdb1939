@@ -18,6 +18,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>
             <a class="navbar-brand" href="home">MHRSAM</a>
             <button
                 class="navbar-toggler"
@@ -89,7 +90,7 @@
                         </div>
                         <div class="form-group">
                             {{ form.first_name.label(class="form-control-label") }}
-                            {% if form.tc.errors %}
+                            {% if form.first_name.errors %}
                             {{ form.first_name(class="form-control form-control-lg is-invalid") }}
                                 <div class = "invalid-feedback">
                                     {% for error in form.first_name.errors %}
@@ -102,7 +103,7 @@
                         </div>
                         <div class="form-group">
                             {{ form.last_name.label(class="form-control-label") }}
-                            {% if form.tc.errors %}
+                            {% if form.last_name.errors %}
                             {{ form.last_name(class="form-control form-control-lg is-invalid") }}
                                 <div class = "invalid-feedback">
                                     {% for error in form.last_name.errors %}
@@ -113,6 +114,15 @@
                                     {{ form.last_name(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
+                        <fieldset>
+                    
+                                <div class="form-group">
+                                    {{ form.gender.label(class="form-control-label") }}
+                                    {{ form.csrf_token }}
+                                    {{ form.gender(class="form-control form-control-lg" ) }}
+                                </div>
+            
+                        </fieldset>
                         <div class="form-group">
                             {{ form.email.label(class="form-control-label") }}
                             {% if form.email.errors %}

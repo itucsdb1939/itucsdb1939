@@ -76,25 +76,16 @@
                     <table class="table table-hover" style = "margin-top:5%;">
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Patient ID</th>
-                            <th scope="col">Doctor ID</th>
-                            <th scope="col">Nurse ID</th>
-                            <th scope="col">Op. room</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Time</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Diagnosis</th>
+                            
                           </tr>
                         </thead>
                         <tbody>
                             {% for t in table %}
                                 <tr>
-                                    <td scope="col">{{t[0]}}</td>
-                                    <td scope="col">{{t[1]}}</td>
-                                    <td scope="col">{{t[2]}}</td>
+                                    <td scope="col">{{pt}}</td>
                                     <td scope="col">{{t[3]}}</td>
-                                    <td scope="col">{{t[4]}}</td>
-                                    <td scope="col">{{t[5]}}</td>
-                                    <td scope="col">{{t[6]}}</td>
                                 </tr>
                             {% endfor %}
                           
