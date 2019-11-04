@@ -19,8 +19,8 @@ def initialize(url):
 
 
 if __name__ == "__main__":
-    url = os.getenv("postgres://afoeiapd:3N1LWGKtLZAdeI2sEQQR4N0I6GE1EnOM@salt.db.elephantsql.com:5432/afoeiap")
+    url = os.getenv("DATABASE_URL")
     if url is None:
-        print("Usage: DATABASE_URL=url python dbinit.py", file=sys.stderr)
+        print("Usage: DATABASE_URL=url python dbinit.py")# file=sys.stderr)
         sys.exit(1)
     initialize(url)
