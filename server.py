@@ -1,6 +1,15 @@
+from dbinit import initialize
 from flask import Flask,render_template, flash, redirect, url_for, request, session, jsonify
 from forms import RegistrationForm, LoginForm, LoginFormP, RegistrationFormD,Operation,Appointment,RegistrationFormN
 import psycopg2
+from os import environ
+
+RELEASE = True
+
+if(not RELEASE):
+    environ['DATABASE_URL'] = "postgres://afoeiapd:3N1LWGKtLZAdeI2sEQQR4N0I6GE1EnOM@salt.db.elephantsql.com:5432/afoeiap"
+    initialize(environ.get('DATABASE_URL'))
+
 
 app = Flask(__name__)
 
@@ -282,4 +291,7 @@ def make_appointment():
 
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    if(not RELEASE):
+        app.run(debug=True)
+    else:
+        app.run()
