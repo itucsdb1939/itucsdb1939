@@ -5,8 +5,32 @@ import psycopg2 as dbapi2
 
 
 INIT_STATEMENTS = [
-    #Seda Sügür
+     #Buket Akgün
     """
+    CREATE TABLE IF NOT EXISTS person(
+        tc BIGINT NOT NULL PRIMARY KEY UNIQUE,
+        first_name TEXT NOT NULL,
+        last_name TEXT NOT NULL,
+        gender VARCHAR(1) NOT NULL,
+        email TEXT,
+        phone BIGINT,
+        pass TEXT NOT NULL
+    )
+    """,
+    """ 
+    CREATE TABLE IF NOT EXISTS doctor(
+        tc BIGINT NOT NULL PRIMARY KEY UNIQUE,
+        first_name TEXT NOT NULL,
+        last_name TEXT NOT NULL,
+        gender VARCHAR(1) NOT NULL,
+        email TEXT,
+        phone BIGINT,
+        room INTEGER NOT NULL,
+        dep TEXT NOT NULL,
+        pass TEXT NOT NULL 
+    )
+    """,
+     """
     CREATE TABLE IF NOT EXISTS nurse(
         tc BIGINT NOT NULL PRIMARY KEY UNIQUE,
         first_name TEXT NOT NULL,
@@ -18,6 +42,23 @@ INIT_STATEMENTS = [
         pass TEXT NOT NULL
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS surgery(
+        id BIGINT PRIMARY KEY NOT NULL,
+        patient_id BIGINT REFERENCES person(tc) ON DELETE RESTRICT ON UPDATE CASCADE,
+        doctor_id BIGINT REFERENCES doctor(tc) ON DELETE RESTRICT ON UPDATE CASCADE,
+        nurse_id BIGINT REFERENCES nurse(tc) ON DELETE RESTRICT ON UPDATE CASCADE,
+        op_room INTEGER NOT NULL,
+        date TEXT NOT NULL,
+        time TEXT NOT NULL,
+        blood_type TEXT NOT NULL,
+        op_report TEXT,
+        UNIQUE(date,time,op_room)
+    )
+    """,
+    
+    #Seda Sügür
+   
     """
     CREATE TABLE IF NOT EXISTS prescription(
         id BIGSERIAL PRIMARY KEY NOT NULL UNIQUE,
@@ -46,45 +87,7 @@ INIT_STATEMENTS = [
         full_blood_count TEXT
     )
     """,
-    #Buket Akgün
-    """
-    CREATE TABLE IF NOT EXISTS person(
-        tc BIGINT NOT NULL PRIMARY KEY UNIQUE,
-        first_name TEXT NOT NULL,
-        last_name TEXT NOT NULL,
-        gender VARCHAR(1) NOT NULL,
-        email TEXT,
-        phone BIGINT,
-        pass TEXT NOT NULL
-    )
-    """,
-    """ 
-    CREATE TABLE IF NOT EXISTS doctor(
-        tc BIGINT NOT NULL PRIMARY KEY UNIQUE,
-        first_name TEXT NOT NULL,
-        last_name TEXT NOT NULL,
-        gender VARCHAR(1) NOT NULL,
-        email TEXT,
-        phone BIGINT,
-        room INTEGER NOT NULL,
-        dep TEXT NOT NULL,
-        pass TEXT NOT NULL 
-    )
-    """,
-    """
-    CREATE TABLE IF NOT EXISTS surgery(
-        id BIGINT PRIMARY KEY NOT NULL,
-        patient_id BIGINT REFERENCES person(tc) ON DELETE RESTRICT ON UPDATE CASCADE,
-        doctor_id BIGINT REFERENCES doctor(tc) ON DELETE RESTRICT ON UPDATE CASCADE,
-        nurse_id BIGINT REFERENCES nurse(tc) ON DELETE RESTRICT ON UPDATE CASCADE,
-        op_room INTEGER NOT NULL,
-        date TEXT NOT NULL,
-        time TEXT NOT NULL,
-        blood_type TEXT NOT NULL,
-        op_report TEXT,
-        UNIQUE(date,time,op_room)
-    )
-    """,
+   
     #Extras
     """
     CREATE TABLE IF NOT EXISTS record(
