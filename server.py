@@ -1,7 +1,7 @@
-from dbinit import initialize
 from flask import Flask,render_template, flash, redirect, url_for, request, session, jsonify
-from forms import RegistrationForm, LoginForm, LoginFormP, RegistrationFormD,Operation,Appointment,RegistrationFormN
+from forms import RegistrationForm, LoginForm, LoginFormP, NewPatient, RegistrationFormD,Operation,Appointment,RegistrationFormN
 import psycopg2
+from dbinit import initialize
 from os import environ
 
 RELEASE = True
@@ -9,8 +9,6 @@ RELEASE = True
 if(not RELEASE):
     environ['DATABASE_URL'] = "postgres://afoeiapd:3N1LWGKtLZAdeI2sEQQR4N0I6GE1EnOM@salt.db.elephantsql.com:5432/afoeiap"
     initialize(environ.get('DATABASE_URL'))
-
-
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'f5b9ac4eddb1942feeb7d826b76b4a3f'
@@ -77,13 +75,13 @@ def register_nr():
                 conn = CDB()
                 cur = conn.cursor()
                 statement = "INSERT INTO nurse (tc,first_name,last_name,gender,email,phone,dep,pass) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"       
-                cur.execute(statement,(request.form['tc'],request.form['first_name'],request.form['last_name'],request.form['gender'],request.form['email'],request.form['phone'],request.form['dep'],request.form['password'],))
+                cur.execute(statement,(request.form['tc'],request.form['first_name'],request.form['last_name'],request.form['gender'],request.form['email'],request.form['phone'],request.form['department'],request.form['password'],))
                 conn.commit()
                 cur.close()
                 conn.close()
                 return redirect(url_for('login_nr'))
             except:
-                return redirect(url_for('home'))
+                print("error")
     return render_template("register_nr.html", form = form)
 
 @app.route("/op_dr", methods=['GET', 'POST'])
@@ -158,29 +156,99 @@ def blood():
         print("error")
     return render_template("blood_test.html", table = blood, dr=doctor)
 
+@app.route("/patient_view/prescription/<pres>", methods=['GET', 'POST'])
+def pres_view(pres):
+    prescriptions = []
+    try:
+        conn = CDB()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM prescription WHERE (id = %s)",(pres,))
+        prescriptions = cur.fetchall()
+        cur.close()
+        conn.close()
+    except:
+        print("error")
+    return render_template("pres_view.html", pres = prescriptions)
+@app.route("/patient_view/test/<test>", methods=['GET', 'POST'])
+def test_view(test):
+    tests = []
+    try:
+        conn = CDB()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM test WHERE (id = %s)",(test,))
+        tests = cur.fetchall()
+        cur.close()
+        conn.close()
+    except:
+        print("error")
+    return render_template("test_view.html", test = tests)
 
 @app.route("/patient_view", methods=['GET', 'POST'])
 def p_view():
     patients = []
     patient_names = []
+    patient_pres = []
+    patient_test = []
+    pres_id = []
+    l = 0
     try:
         conn = CDB()
         cur = conn.cursor()
         cur.execute("SELECT * FROM record WHERE (doctor_id = %s)",(session['tc'],))
-        patients = cur.fetchall() 
+        patients = cur.fetchall()
         if(patients != []):
-            cur.execute("SELECT first_name, last_name FROM person WHERE (tc = %s)",(patients[0][0],))
-            patient = cur.fetchall()
-            print(patient)
-            for i in range(0,len(patient)):
-                print(i)
-                patient_names[i] = patient[i][0] + " " + patient[i][1]
-                print("hoho")
+            for i in range(0,len(patients)):
+                cur.execute("SELECT first_name, last_name FROM person WHERE (tc = %s)",(patients[i][0],))
+                patient = cur.fetchall()
+                p = patient[0][0] + " " + patient[0][1]
+                patient_names.append(p)
+                cur.execute("SELECT * FROM prescription WHERE (patient_id = %s)",(patients[i][0],))
+                pres = cur.fetchall()
+                patient_pres.append([])
+                for j in range(0,len(pres)):
+                    patient_pres[i].append(pres[j][0])
+                cur.execute("SELECT * FROM test WHERE (patient_id = %s)",(patients[i][0],))
+                test = cur.fetchall()
+                patient_test.append([])
+                for j in range(0,len(test)):
+                    patient_test[i].append(test[j][0])  
+            l = len(patients)
+            print(patient_test)
         cur.close()
         conn.close()
     except:
         print("error")
-    return render_template("patient_view.html", table = patients, pt=patient_names)
+    return render_template("patient_view.html", table = patients, pt=patient_names,pres = patient_pres,len = l,test = patient_test)
+
+
+@app.route("/new_patient", methods=['GET', 'POST'])
+def new_pat():
+    pres_id = []
+    diag = []
+    test_id = []
+    form = NewPatient()
+    if (request.method =='POST'):
+        if form.validate_on_submit():
+            try:
+                conn = CDB()
+                cur = conn.cursor()
+                pres_id = request.form['pres_id']
+                diag = request.form['diag']
+                test_id = request.form['test_id']
+                statement = "INSERT INTO record (patient_id,doctor_id,pres_id,diagnosis,test_id) VALUES (%s,%s,%s,%s,%s)"
+                cur.execute(statement,(request.form['patient_id'],session['tc'],pres_id,diag,test_id,))
+                conn.commit()
+                cur.close()
+                conn.close()
+                flash('New record registraton successful.', 'success')
+                return redirect(url_for('p_view'))
+            except:
+                print("error")
+                
+    
+    return render_template("new_patient.html",form = form)
+
+
 
 @app.route("/home_dr", methods=['GET', 'POST'])
 def home_dr():
@@ -232,15 +300,20 @@ def login_dr():
                 result = cur.fetchone()
                 if(result[0] == passw):
                     session['tc'] = tc
+                    cur.close()
+                    conn.close()
                     return redirect(url_for('home_dr'))
                 else:
                     flash('no login', 'danger')
+                    cur.close()
+                    conn.close()
                     return redirect(url_for('login_dr'))
-                cur.close()
-                conn.close()
+                
             except:
                 print("error")
     return render_template("login_doctor.html", form = form)
+
+
 
 @app.route("/login_nr", methods=['GET', 'POST'])
 def login_nr():
@@ -271,20 +344,121 @@ def make_appointment():
     try:
         conn = CDB()
         cur = conn.cursor()
-        cur.execute("SELECT dep FROM doctor ORDER BY dep ASC")
+        cur.execute("SELECT DISTINCT dep FROM all_appointments ORDER BY dep ASC")
         dep = cur.fetchall()
         deps = []
-        for i in range(0,len(dep)):
-            deps.append(tuple((i,dep[i][0])))
+        deps.append(tuple((' ','Select')))
         
+        for i in range(0,len(dep)):
+            deps.append(tuple((dep[i][0],dep[i][0])))
         form.dep.choices = deps
+        
         if (request.method =='POST'):
-            ph = form.dep.data
-            url = "/make_appointment/{}".format(dep[int(ph)][0])
-            return redirect(url)
+            date = request.form['date']
+            tc = session['tc']
+            doctor = request.form['doctor']
+            time = request.form['time']
+            print(date)
+            print(time)
+            print(tc)
+            print(doctor)
+            cur.execute("INSERT INTO taken_appointments (patient_id,doctor_id,date,time) VALUES (%s,%s,%s,%s)",(tc,doctor,date,time,))
+            cur.execute("DELETE FROM all_appointments WHERE AND doctor_id = %s AND date = %s AND time = %s",(doctor,date,time,))
+            
+        cur.close()
+        conn.close()
     except:
         print("error")
     return render_template("appo.html", form = form)
+
+@app.route("/make_appointment/<dep>",methods=["GET","POST"])
+def select_doc(dep):
+    appo_doc = []
+    try:
+        conn = CDB()
+        cur = conn.cursor()
+        cur.execute("SELECT doctor_id FROM all_appointments WHERE dep = %s",(dep,))
+        result = cur.fetchall()
+        for i in range(0,len(result)):
+            appo_doc.append(result[i][0])
+        doc = []
+        docObj = {}
+        docObj['tc'] = 0
+        docObj['name'] = 'Select'
+        doc.append(docObj)
+        for i in appo_doc:
+            cur.execute("SELECT first_name,last_name FROM doctor WHERE tc = %s",(i,))
+            result = cur.fetchall()
+            name = result[0][0] + " " + result[0][1]
+            docObj = {}
+            docObj['tc'] = i
+            docObj['name'] = name
+            doc.append(docObj)
+            
+        cur.close()
+        conn.close()
+    except:
+        print("error")
+    return jsonify({"docs": doc})
+
+@app.route("/make_appointment/<dep>/<doc>",methods=["GET","POST"])
+def select_date(dep,doc):
+    dates = []
+    try:
+        conn = CDB()
+        cur = conn.cursor()
+        cur.execute("SELECT date FROM all_appointments WHERE dep = %s AND doctor_id = %s",(dep,doc,))
+        result = cur.fetchall()
+      
+        for i in range(0,len(result)):
+            dates.append(int(result[i][0]))
+       
+        date = []
+        dateObj = {}
+        dateObj['id'] = 0
+        dateObj['date'] = 'Select'
+        date.append(dateObj)
+        for i in dates:
+            dateObj = {}
+            dateObj['id'] = i
+            dateObj['date'] = i
+            date.append(dateObj)
+        
+        cur.close()
+        conn.close()
+    except:
+        print("error")
+    return jsonify({"dates": date})
+
+@app.route("/make_appointment/<dep>/<doc>/<date>",methods=["GET","POST"])
+def select_time(dep,doc,date):
+    times = []
+    try:
+        conn = CDB()
+        cur = conn.cursor()
+        cur.execute("SELECT date FROM all_appointments WHERE dep = %s AND doctor_id = %s AND date = %s",(dep,doc,date,))
+        result = cur.fetchall()
+   
+        for i in range(0,len(result)):
+            times.append(int(result[i][0]))
+        
+        time = []
+        timeObj = {}
+        timeObj['id'] = 0
+        timeObj['time'] = 'Select'
+        time.append(timeObj)
+        for i in times:
+            timeObj = {}
+            timeObj['id'] = i
+            timeObj['time'] = i
+            time.append(timeObj)
+        
+        cur.close()
+        conn.close()
+    except:
+        print("error")
+    return jsonify({"times": time})
+
 
 
 
