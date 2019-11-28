@@ -19,7 +19,7 @@ class RegistrationFormN(FF):
     gender = SelectField('Gender', choices = [('F','Female'),('M','Male')])
     email = StringField('Email', validators = [DataRequired(), Email()])
     phone = IntegerField('Phone Number', validators = [DataRequired()])
-    department = SelectField('Department', choices = [('Cardiology','Cardiology'),('ChestDiseases','Chest Diseases'),('Dermatology','Dermatology'),('DietandNutrition','Diet and Nutrition'),('ENT','Ear, Nose and Throat'),('Eye','Eye'),('GeneralSurgery','General Surgery'),('Gynecology','Gynecology'),('Nephrology','Nephrology'),('Neurology','Neurology'),('Oncology','Oncology'),('Orthopedics','Orthopedics'),('Pediatrics','Pediatrics'),('Psychiatry','Psychiatry'),('Psychology','Psychology'),('PD','Pulmonary Diseases'),('Urology','Urology')])
+    department = SelectField('Department', choices = [('Cardiology','Cardiology'),('ChestDiseases','Chest Diseases'),('Dermatology','Dermatology'),('DietandNutrition','Diet and Nutrition'),('EarNoseThroat','Ear, Nose and Throat'),('Eye','Eye'),('GeneralSurgery','General Surgery'),('Gynecology','Gynecology'),('Nephrology','Nephrology'),('Neurology','Neurology'),('Oncology','Oncology'),('Orthopedics','Orthopedics'),('Pediatrics','Pediatrics'),('Psychiatry','Psychiatry'),('Psychology','Psychology'),('PulmonaryDiseases','Pulmonary Diseases'),('Urology','Urology')])
     password = PasswordField('Password', validators = [DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators = [DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
@@ -36,7 +36,13 @@ class RegistrationFormD(FF):
     confirm_password = PasswordField('Confirm Password', validators = [DataRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
 
-
+class NewPatient(FF):
+    patient_id = IntegerField('Patient ID', validators=[DataRequired()])
+    doctor_id = IntegerField('Doctor ID', validators = [DataRequired()])
+    pres_id = IntegerField('Prescription ID')
+    test_id = IntegerField('Test ID')
+    diag = StringField('Diagnosis')
+    submit = SubmitField('Enter')
 class Operation(FF):
     patient_id = IntegerField('Patient ID', validators=[DataRequired()])
     doctor_id = IntegerField('Doctor ID', validators = [DataRequired()])
@@ -59,6 +65,9 @@ class LoginForm(FF):
 
 class Appointment(FF):
     dep = SelectField('Department', choices=[])
+    doctor = SelectField('Doctor', choices=[] )
+    date = SelectField('Date', choices=[])
+    time = SelectField('Time', choices=[] )
     submit = SubmitField('Submit')
 
    
