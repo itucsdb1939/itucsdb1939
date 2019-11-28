@@ -14,7 +14,6 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous">
 
-        <title>HOME</title>
         <link
             href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
             rel="stylesheet"
@@ -60,7 +59,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>
+                <a class="navbar-brand" href="home"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i></a>
 
             <a class="navbar-brand" href="home">MHRSAM</a>
             <button
@@ -77,21 +76,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="home">Home
-                            <span class="sr-only">(current)</span></a>
+                        
+                            <span class="sr-only">(current)</span>
                     </li>
-                    
+
                 </ul>
                 <nav class="navbar navbar-dark bg-dark justify-content-end">
-                        <form class="form-inline">
-    
-    
-                            <a class="nav-link " href="sign_out">
-                                <button class="btn btn-secondary" type="button">Sign Out</button>
-                            </a>
-    
-                        </form>
-                    </nav>
+                    <form class="form-inline">
+                        <a class="nav-link " href="sign_out">
+                            <button class="btn btn-secondary" type="button">Sign Out</button>
+                        </a>
+
+                    </form>
+                </nav>
             </div>
         </nav>
         <a
@@ -133,7 +130,6 @@
                         <div class="box-part text-center">
                             <i class="fa fa-tint fa-3x" aria-hidden="true"></i>
 
-
                             <div class="title">
                                 <a href="blood_test" class="text-dark">
                                     <h4>Blood Tests</h4>
@@ -149,7 +145,7 @@
                             <i class="fa fa-calendar fa-3x" aria-hidden="true"></i>
 
                             <div class="title">
-                                <a href="#" class="text-dark">
+                                <a href="make_appointment" class="text-dark">
                                     <h4>Appointments</h4>
                                 </a>
                             </div>

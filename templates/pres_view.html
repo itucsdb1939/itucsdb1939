@@ -33,21 +33,28 @@
         
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
+                            <li class="nav-item ">
                                 <a class="nav-link" href="home">Home
                                     <span class="sr-only">(current)</span></a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="op_dr">Surgeries</a>
+                            </li>
                             
+                            <li class="nav-item  active justify-content-end">
+                                <a class="nav-link " href="patient_view">Patients</a>
+                            </li>
                         </ul>
                         <nav class="navbar navbar-dark bg-dark justify-content-end">
                                 <form class="form-inline">
-                                  
-                                  <a class="nav-link" href="login"><button class="btn btn-secondary" type="button">Login</button></a>
-                                  
-                                  <a class="nav-link " href="register"><button class="btn btn-secondary" type="button">Sign Up</button></a>
-                                  
+            
+                                    <a class="nav-link " href="sign_out">
+                                        <button class="btn btn-secondary" type="button">Sign Out</button>
+                                    </a>
+            
                                 </form>
-                              </nav>
+                            </nav>
+                        
                     </div>
                 </nav>
 
@@ -64,64 +71,35 @@
                 {% endwith %}
             </div>
             <div class="jumbotron" style="margin-top:10%;margin-bottom:10%;">
-                    <div>
-                            <ul class="nav nav-tabs">
-                                    <li class="nav-item">
-                                      <a class="nav-link " href="login">Patient</a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a class="nav-link " href="login_dr">Doctor</a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a class="nav-link active" href="login_nr">Nurse</a>
-                                    </li>
-                                  </ul>
-                    </div>
-                <h1 class="display-6" style="margin-bottom: 3%;margin-top: 2%;">Login</h1>
-                <form method="POST" action="">
-                    {{ form.hidden_tag() }}
-                    <fieldset class="form-group">
-                        <div class="form-group">
-                            {{ form.tc.label(class="form-control-label") }}
-                            {% if form.tc.errors %}
-                                {{ form.tc(class="form-control form-control-lg is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.tc.errors %}
-                                        <span>{{  error  }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.tc(class="form-control form-control-lg") }}
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                            {{ form.password.label(class="form-control-label") }}
-                            {% if form.password.errors %}
-                                {{ form.password(class="form-control form-control-lg is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.password.errors %}
-                                        <span>{{  error  }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.password(class="form-control form-control-lg") }}
-                            {% endif %}
-
-                        </div>
-                        
-                    </fieldset>
-                    <div class="form-group">
-                        {{ form.submit(class="btn btn-outline-info") }}
-                    </div>
                     
-
-                    <div class="border-top pt-3" style="margin-left: 73%;">
-                        <small class="text-muted">
-                            Need an account?
-                            <a class="ml-2" href="{{ url_for('register') }}">Sign up</a>
-                        </small>
-                    </div>
-                </form>
+                    
+                    <table class="table table-hover" style = "margin-top:5%;">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Patient ID</th>
+                            <th scope="col">Doctor ID</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Starting Date</th>
+                            <th scope="col">Ending Date</th>
+                            <th scope="col">Pills</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in pres %}
+                                <tr>
+                                    <td scope="col">{{p[0]}}</td>
+                                    <td scope="col">{{p[1]}}</td>
+                                    <td scope="col">{{p[2]}}</td>
+                                    <td scope="col">{{p[3]}}</td>
+                                    <td scope="col">{{p[4]}}</td>
+                                    <td scope="col">{{p[5]}}</td>
+                                    <td scope="col">{{p[6]}}</td>
+                                </tr>
+                            {% endfor %}
+                          
+                        </tbody>
+                      </table>
             </div>
         </div>
         <footer id="sticky-footer" class="py-4 bg-dark text-white-50">

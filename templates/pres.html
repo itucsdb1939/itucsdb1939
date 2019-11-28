@@ -14,52 +14,50 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous">
 
-        <title>HOME</title>
     </head>
     <body>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>
-                    <a class="navbar-brand" href="home">MHRSAM</a>
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-        
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="home_p">Home
-                                    <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item justify-content-end">
-                                    <a class="nav-link " href="prescriptions">Prescriptions</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="blood_test">Blood Test</a>
-                            </li>
-                            <li class="nav-item">
-                                    <a class="nav-link" href="make_appointment">Appointments</a>
-                                </li>
-                        </ul>
-                        <nav class="navbar navbar-dark bg-dark justify-content-end">
-                                <form class="form-inline">
-            
-            
-                                    <a class="nav-link " href="sign_out">
-                                        <button class="btn btn-secondary" type="button">Sign Out</button>
-                                    </a>
-            
-                                </form>
-                            </nav>
-                        
-                    </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="home"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i></a>
+            <a class="navbar-brand" href="home">MHRSAM</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="home_p">Home
+                            <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active justify-content-end">
+                        <a class="nav-link " href="prescriptions">Prescriptions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blood_test">Blood Test</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="make_appointment">Appointments</a>
+                    </li>
+                </ul>
+                <nav class="navbar navbar-dark bg-dark justify-content-end">
+                    <form class="form-inline">
+
+                        <a class="nav-link " href="sign_out">
+                            <button class="btn btn-secondary" type="button">Sign Out</button>
+                        </a>
+
+                    </form>
                 </nav>
+
+            </div>
+        </nav>
 
         <div class="container">
             <div style="margin-top: 2%;">
@@ -74,40 +72,40 @@
                 {% endwith %}
             </div>
             <div class="jumbotron" style="margin-top:10%;margin-bottom:10%;">
-                    <div>
-                            <h1>Prescriptions</h1>
-                    </div>
-                    
-                    <table class="table table-hover" style = "margin-top:5%;">
-                        <thead>
-                          <tr>
+                <div>
+                    <h1>Prescriptions</h1>
+                </div>
+
+                <table class="table table-hover" style="margin-top:5%;">
+                    <thead>
+                        <tr>
                             <th scope="col">Doctor</th>
                             <th scope="col">Date</th>
                             <th scope="col">Expiration Date</th>
                             <th scope="col">Diagnosis</th>
                             <th scope="col">Pills</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            {% for t in table %}
-                                <tr>
-                                    <td scope="col">{{dr}}</td>
-                                    <td scope="col">{{t[4]}}</td>
-                                    <td scope="col">{{t[5]}}</td>
-                                    <td scope="col">{{t[7]}}</td>
-                                    <td scope="col">{{t[6]}}</td>
-                                </tr>
-                            {% endfor %}
-                          
-                        </tbody>
-                      </table>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in table %}
+                            <tr>
+                                <td scope="col">{{dr}}</td>
+                                <td scope="col">{{t[4]}}</td>
+                                <td scope="col">{{t[5]}}</td>
+                                <td scope="col">{{t[7]}}</td>
+                                <td scope="col">{{t[6]}}</td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
             </div>
         </div>
         <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
-                <div class="container text-center">
-                  <small>Copyright &copy; Your Website</small>
-                </div>
-              </footer>
+            <div class="container text-center">
+                <small>Copyright &copy; Your Website</small>
+            </div>
+        </footer>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
