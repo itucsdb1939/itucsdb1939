@@ -1,5 +1,5 @@
 from flask import Flask,render_template, flash, redirect, url_for, request, session, jsonify
-from forms import RegistrationForm, LoginForm, LoginFormP, NewPatient, RegistrationFormD,Operation,Appointment,RegistrationFormN
+from forms import RegistrationForm, LoginForm, LoginFormP, NewPatient, RegistrationFormD,Operation,Appointment,RegistrationFormN,NewTest
 import psycopg2
 from dbinit import initialize
 from os import environ
@@ -248,6 +248,26 @@ def new_pat():
     
     return render_template("new_patient.html",form = form)
 
+@app.route("/new_test", methods=['GET', 'POST'])
+def new_t():
+    form = NewTest()
+    if (request.method =='POST'):
+        if form.validate_on_submit():
+            try:
+                conn = CDB()
+                cur = conn.cursor()
+                statement = "INSERT INTO test (patient_id,doctor_id,liver_func,thyroid_func,genetic,electrolyte,coagulation, blood_gas, blood_glucose, blood_culture, full_blood_count) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                cur.execute(statement,(request.form['patient_id'],request.form['doctor_id'],request.form['liver_func'],request.form['thyroid_func'], request.form['genetic'],request.form['electrolyte'], request.form['coagulation'], request.form['blood_gas'], request.form['blood_glucose'], request.form['blood_culture'], request.form['full_blood_count'],))
+                conn.commit()
+                cur.close()
+                conn.close()
+                flash('New test registraton successful.', 'success')
+                return redirect(url_for('new_test'))
+            except:
+                print("error")
+                
+    
+    return render_template("new_test.html",form = form)
 
 
 @app.route("/home_dr", methods=['GET', 'POST'])
@@ -257,6 +277,10 @@ def home_dr():
 @app.route("/home_p", methods=['GET', 'POST'])
 def home_p():
     return render_template("home_p.html")
+
+@app.route("/home_nurse", methods=['GET', 'POST'])
+def home_nurse():
+    return render_template("home_nurse.html")
 
 @app.route("/sign_out", methods=['GET', 'POST'])
 def sign_out():
@@ -328,7 +352,7 @@ def login_nr():
                 cur.execute("SELECT pass FROM nurse WHERE tc=%s",(tc,))
                 result = cur.fetchone()
                 if(result[0] == passw):
-                    return redirect(url_for('home_dr'))
+                    return redirect(url_for('home_nurse'))
                 else:
                     flash('no login', 'danger')
                     return redirect(url_for('login_nr'))
@@ -358,12 +382,9 @@ def make_appointment():
             tc = session['tc']
             doctor = request.form['doctor']
             time = request.form['time']
-            print(date)
-            print(time)
-            print(tc)
-            print(doctor)
             cur.execute("INSERT INTO taken_appointments (patient_id,doctor_id,date,time) VALUES (%s,%s,%s,%s)",(tc,doctor,date,time,))
-            cur.execute("DELETE FROM all_appointments WHERE AND doctor_id = %s AND date = %s AND time = %s",(doctor,date,time,))
+            cur.execute("DELETE FROM all_appointments WHERE doctor_id = %s AND date = %s AND time = %s",(doctor,date,time,))
+            conn.commit()
             
         cur.close()
         conn.close()
