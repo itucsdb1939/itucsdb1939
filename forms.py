@@ -52,6 +52,20 @@ class Operation(FF):
     time = TimeField('Time', validators=[DataRequired()])
     submit = SubmitField('Enter')
 
+class NewTest(FF):
+    patient_id = IntegerField('Patient ID', validators=[DataRequired()])
+    doctor_id = IntegerField('Doctor ID', validators = [DataRequired()])
+    liver_func = StringField('Liver Func')
+    thyroid_func = StringField('Thyroid Func')
+    genetic = StringField('Genetic')
+    electrolyte = StringField('Electrolyte')
+    coagulation = StringField('Coagulation')
+    blood_gas = StringField('Blood Gas')
+    blood_glucose = StringField('Blood Glucose')
+    blood_culture = StringField('Blood Culture')
+    full_blood_count = StringField('Full Blood Count')
+    submit = SubmitField('Enter')
+
 class LoginFormP(FF):
     tc = IntegerField('TC', validators = [DataRequired()])
     password = PasswordField('Password', validators = [DataRequired()])
