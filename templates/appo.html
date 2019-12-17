@@ -13,14 +13,12 @@
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous">
-
+            <title>Make Appointment</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="home">
-                <i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>
-            </a>
-            <a class="navbar-brand" href="home">MHRSAM</a>
+            
+            <a class="navbar-brand" href="home_p">MHRSAM</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -50,6 +48,9 @@
                 </ul>
                 <nav class="navbar navbar-dark bg-dark justify-content-end">
                     <form class="form-inline">
+                        <a class="nav-link " href="account_update">
+                            <button class="btn btn-secondary" type="button">Account</button>
+                        </a>
 
                         <a class="nav-link " href="sign_out">
                             <button class="btn btn-secondary" type="button">Sign Out</button>
@@ -60,8 +61,22 @@
 
             </div>
         </nav>
-
+        <div class="container">
+            <div style="margin-top: 2%;">
+                {% with messages = get_flashed_messages(with_categories = true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{category}}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
         <div class="jumbotron" style="margin:10% 20% 10% 20%;">
+            <div>
+                <h1>New Appointment</h1>
+            </div>
             <form method="POST">
                 <fieldset>
 
@@ -95,10 +110,10 @@
             </form>
 
         </div>
-
+        </div>
         <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
             <div class="container text-center">
-                <small>Copyright &copy; Your Website</small>
+                <small>Copyright &copy; itu1939</small>
             </div>
         </footer>
 
@@ -173,16 +188,6 @@
                             })
                     })
             }
-            /*
-    submit.onsubmit = function(){
-        doc_tc = doc_select.value
-        dep = dep_select.value
-        date = date_select.value
-        time = time_select.value
-        alert("yyy")
-        fetch('/make_appointment/'+ dep + '/' + doc_tc + '/' + date + '/' + time )
-    }
-    */
         </script>
     </body>
 </html>

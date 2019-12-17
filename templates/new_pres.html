@@ -14,11 +14,11 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous">
 
-        <title>New Patient</title>
+        <title>New Prescription</title>
     </head>
-    <body>
+    <body >
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-           
+            
             <a class="navbar-brand" href="home_dr">MHRSAM</a>
             <button
                 class="navbar-toggler"
@@ -41,10 +41,10 @@
                         <a class="nav-link" href="op_dr">Surgeries</a>
                     </li>
                     
-                    <li class="nav-item active">
+                    <li class="nav-item ">
                         <a class="nav-link " href="patient_view">Patients</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="new_pres">Prescriptions</a>
                     </li>
                     <li class="nav-item">
@@ -65,113 +65,115 @@
 
             </div>
         </nav>
-                <div class="container">
-                    <div style="margin-top: 2%;">
-                        {% with messages = get_flashed_messages(with_categories = true) %}
-                        {% if messages %}
-                            {% for category, message in messages %}
-                                <div class="alert alert-{{category}}">
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                        {% endwith %}
-                    </div>
-            <div class="jumbotron" style = "margin-right:20%;margin-left:20%;margin-top:5%;margin-bottom:5%;">
-                    <div>
-                            <ul class="nav nav-tabs">
-                                    <li class="nav-item">
-                                      <a class="nav-link active" href="new_patient">New</a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a class="nav-link" href="patient_view">View</a>
-                                    </li>
-                                  </ul>
-                    </div>    
-                <h2 class="display-5" style = "margin-bottom: 3%;margin-top:2%;">New Patient</h2>
+
+        <div class="container">
+            <div style="margin-top: 2%;">
+                {% with messages = get_flashed_messages(with_categories = true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{category}}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div class="jumbotron" style="margin-top:10%;margin-bottom:10%;">
+                    
+                <h1 class="display-6" style="margin-bottom: 3%;margin-top: 2%;">Add new prescription</h1>
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
                         <div class="form-group">
-                            {{ form.patient_id.label(class="form-control-label") }}
+                            {{ form.patient.label(class="form-control-label") }}
+                            {% if form.patient.errors %}
+                                {{ form.patient(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.patient.errors %}
+                                        <span>{{  error  }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.patient(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.pres_type.label(class="form-control-label") }}
+                            {% if form.pres_type.errors %}
+                                {{ form.pres_type(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.pres_type.errors %}
+                                        <span>{{  error  }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.pres_type(class="form-control form-control-lg") }}
+                            {% endif %}
 
-                            {% if form.patient_id.errors %}
-                                {{ form.patient_id(class="form-control form-control-lg is-invalid") }}
-                                <div class = "invalid-feedback">
-                                    {% for error in form.patient_id.errors %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.start_date.label(class="form-control-label") }}
+                            {% if form.start_date.errors %}
+                                {{ form.start_date(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.start_date.errors %}
                                         <span>{{  error  }}</span>
                                     {% endfor %}
                                 </div>
-                                {% else %}
-                                    {{ form.patient_id(class="form-control form-control-lg") }}
+                            {% else %}
+                                {{ form.start_date(class="form-control form-control-lg") }}
                             {% endif %}
+
                         </div>
                         <div class="form-group">
-                            {{ form.doctor_id.label(class="form-control-label") }}
-                            {% if form.doctor_id.errors %}
-                            {{ form.doctor_id(class="form-control form-control-lg is-invalid") }}
-                                <div class = "invalid-feedback">
-                                    {% for error in form.doctor_id.errors %}
+                            {{ form.end_date.label(class="form-control-label") }}
+                            {% if form.end_date.errors %}
+                                {{ form.end_date(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.end_date.errors %}
                                         <span>{{  error  }}</span>
                                     {% endfor %}
                                 </div>
-                                {% else %}
-                                    {{ form.doctor_id(class="form-control form-control-lg") }}
+                            {% else %}
+                                {{ form.end_date(class="form-control form-control-lg") }}
                             {% endif %}
+
                         </div>
                         <div class="form-group">
-                            {{ form.pres_id.label(class="form-control-label") }}
-                            {% if form.pres_id.errors %}
-                            {{ form.pres_id(class="form-control form-control-lg is-invalid") }}
-                                <div class = "invalid-feedback">
-                                    {% for error in form.pres_id.errors %}
+                            {{ form.pill.label(class="form-control-label") }}
+                            {% if form.pill.errors %}
+                                {{ form.pill(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.pill.errors %}
                                         <span>{{  error  }}</span>
                                     {% endfor %}
                                 </div>
-                                {% else %}
-                                    {{ form.pres_id(class="form-control form-control-lg") }}
+                            {% else %}
+                                {{ form.pill(class="form-control form-control-lg") }}
                             {% endif %}
+
                         </div>
                         <div class="form-group">
-                            {{ form.test_id.label(class="form-control-label") }}
-                            {% if form.test_id.errors %}
-                            {{ form.test_id(class="form-control form-control-lg is-invalid") }}
-                                <div class = "invalid-feedback">
-                                    {% for error in form.test_id.errors %}
-                                        <span>{{  error  }}</span>
-                                    {% endfor %}
-                                </div>
-                                {% else %}
-                                    {{ form.test_id(class="form-control form-control-lg") }}
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                                {{ form.diag.label(class="form-control-label")}}
-                                
-                                {% if form.diag.errors %}
+                            {{ form.diag.label(class="form-control-label") }}
+                            {% if form.diag.errors %}
                                 {{ form.diag(class="form-control form-control-lg is-invalid") }}
-                             
-                                    <div class = "invalid-feedback">
-                                        {% for error in form.diag.errors %}
-                                            <span>{{  error  }}</span>
-                                        {% endfor %}
-                                    </div>
-                                    {% else %}
-                                        {{ form.diag(class="form-control form-control-lg") }}
-                                {% endif %}
-                                
-                            </div>
+                                <div class="invalid-feedback">
+                                    {% for error in form.diag.errors %}
+                                        <span>{{  error  }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.diag(class="form-control form-control-lg") }}
+                            {% endif %}
 
-                        
-                        
+                        </div>
                     </fieldset>
                     <div class="form-group">
                         {{ form.submit(class="btn btn-outline-info") }}
                     </div>
+                    
                 </form>
-                
             </div>
-
         </div>
         <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
                 <div class="container text-center">

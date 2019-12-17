@@ -14,12 +14,11 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous">
 
-        <title>HOME</title>
+        <title>New Test</title>
     </head>
     <body >
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="home"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i></a>
-                    <a class="navbar-brand" href="home">MHRSAM</a>
+                    <a class="navbar-brand" href="home_nurse">MHRSAM</a>
                     <button
                         class="navbar-toggler"
                         type="button"
@@ -38,25 +37,26 @@
                                     <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="op_view">Surgeries</a>
+                                <a class="nav-link" href="op_view_nurse">Surgeries</a>
                             </li>
 
                             <li class="nav-item active">
                                 <a class="nav-link" href="new_test">Tests</a>
                             </li>
                             
-                            <li class="nav-item justify-content-end">
-                                <a class="nav-link " href="patient_view">Patients</a>
-                            </li>
+                            
                         </ul>
                         <nav class="navbar navbar-dark bg-dark justify-content-end">
-                                <form class="form-inline">
-            
-                                    <a class="nav-link " href="sign_out">
-                                        <button class="btn btn-secondary" type="button">Sign Out</button>
-                                    </a>
-            
-                                </form>
+                            <form class="form-inline">
+                                <a class="nav-link " href="account_update_nurse">
+                                    <button class="btn btn-secondary" type="button">Account</button>
+                                </a>
+        
+                                <a class="nav-link " href="sign_out">
+                                    <button class="btn btn-secondary" type="button">Sign Out</button>
+                                </a>
+        
+                            </form>
                             </nav>
                         
                     </div>
@@ -81,11 +81,14 @@
                                       <a class="nav-link active" href="new_test">New</a>
                                     </li>
                                     <li class="nav-item">
-                                      <a class="nav-link " href="test_view">View</a>
+                                      <a class="nav-link " href="test_update_nurse">Update</a>
                                     </li>
-                                  </ul>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="test_delete">Delete</a>
+                                    </li>
+                            </ul>
                     </div>
-                <h1 class="display-6" style="margin-bottom: 3%;margin-top: 2%;">New Test</h1>
+                <h1 class="display-6" style="margin-bottom: 3%;margin-top: 2%;">Add New Test</h1>
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
@@ -257,7 +260,7 @@
         </div>
         <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
                 <div class="container text-center">
-                  <small>Copyright &copy; Your Website</small>
+                  <small>Copyright &copy; itu1939</small>
                 </div>
               </footer>
 

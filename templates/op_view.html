@@ -14,12 +14,11 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous">
 
-        <title>HOME</title>
+        <title>View Surgery</title>
     </head>
     <body>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="home"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i></a>
-                    <a class="navbar-brand" href="home">MHRSAM</a>
+                    <a class="navbar-brand" href="home_dr">MHRSAM</a>
                     <button
                         class="navbar-toggler"
                         type="button"
@@ -34,20 +33,28 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item ">
-                                <a class="nav-link" href="home">Home
+                                <a class="nav-link" href="home_dr">Home
                                     <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item active">
                                 <a class="nav-link" href="op_dr">Surgeries</a>
                             </li>
                             
-                            <li class="nav-item justify-content-end">
+                            <li class="nav-item ">
                                 <a class="nav-link " href="patient_view">Patients</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="new_pres">Prescriptions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="appointment_view">Appointments</a>
                             </li>
                         </ul>
                         <nav class="navbar navbar-dark bg-dark justify-content-end">
                                 <form class="form-inline">
-            
+                                    <a class="nav-link " href="account_update_dr">
+                                        <button class="btn btn-secondary" type="button">Account</button>
+                                    </a>
                                     <a class="nav-link " href="sign_out">
                                         <button class="btn btn-secondary" type="button">Sign Out</button>
                                     </a>
@@ -79,6 +86,13 @@
                                     <li class="nav-item">
                                       <a class="nav-link active" href="op_view">View</a>
                                     </li>
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="update_op">Update</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link " href="op_delete">Delete</a>
+                                      </li>
                                   </ul>
                     </div>
                     
@@ -87,23 +101,29 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Patient ID</th>
-                            <th scope="col">Doctor ID</th>
                             <th scope="col">Nurse ID</th>
                             <th scope="col">Op. room</th>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
+                            <th scope="col">Blood Type</th>
+                            <th scope="col">Report</th>
+                            <th scope="col">    </th>
+                            <th scope="col">    </th>
                           </tr>
                         </thead>
                         <tbody>
                             {% for t in table %}
                                 <tr>
-                                    <td scope="col">{{t[0]}}</td>
+                                    <td id = "op_id" scope="col">{{t[0]}}</td>
                                     <td scope="col">{{t[1]}}</td>
-                                    <td scope="col">{{t[2]}}</td>
                                     <td scope="col">{{t[3]}}</td>
                                     <td scope="col">{{t[4]}}</td>
                                     <td scope="col">{{t[5]}}</td>
                                     <td scope="col">{{t[6]}}</td>
+                                    <td scope="col">{{t[7]}}</td>
+                                    <td scope="col">{{t[8]}}</td>
+                                    <td scope="col"><button type="button" class="btn btn-info">Update</button></td>
+                                    <td scope="col"><button onclick = "function al(){alert('hey');}" type="button" class="btn btn-danger">Delete</button></td>
                                 </tr>
                             {% endfor %}
                           
@@ -113,12 +133,11 @@
         </div>
         <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
                 <div class="container text-center">
-                  <small>Copyright &copy; Your Website</small>
+                  <small>Copyright &copy; itu1939</small>
                 </div>
               </footer>
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        
         <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

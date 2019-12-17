@@ -14,7 +14,7 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous">
 
-        <title>New Surgery</title>
+        <title>Update Prescription</title>
     </head>
     <body >
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -36,18 +36,15 @@
                                 <a class="nav-link" href="home_dr">Home
                                     <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item active">
+                            <li class="nav-item ">
                                 <a class="nav-link" href="op_dr">Surgeries</a>
                             </li>
                             
                             <li class="nav-item justify-content-end">
                                 <a class="nav-link " href="patient_view">Patients</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item active">
                                 <a class="nav-link" href="new_pres">Prescriptions</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="appointment_view">Appointments</a>
                             </li>
                         </ul>
                         <nav class="navbar navbar-dark bg-dark justify-content-end">
@@ -55,6 +52,7 @@
                                     <a class="nav-link " href="account_update_dr">
                                         <button class="btn btn-secondary" type="button">Account</button>
                                     </a>
+            
                                     <a class="nav-link " href="sign_out">
                                         <button class="btn btn-secondary" type="button">Sign Out</button>
                                     </a>
@@ -78,121 +76,92 @@
                 {% endwith %}
             </div>
             <div class="jumbotron" style="margin-top:10%;margin-bottom:10%;">
-                    <div>
-                            <ul class="nav nav-tabs">
-                                    <li class="nav-item">
-                                      <a class="nav-link active" href="op_dr">New</a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a class="nav-link " href="op_view">View</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="update_op">Update</a>
-                                      </li>
-                                      <li class="nav-item">
-                                        <a class="nav-link " href="op_delete">Delete</a>
-                                      </li>
-                                  </ul>
-                    </div>
-                <h1 class="display-6" style="margin-bottom: 3%;margin-top: 2%;">Add new surgery</h1>
+                    
+                <h1 class="display-6" style="margin-bottom: 3%;margin-top: 2%;">Update Prescription</h1>
+                <h6>Please fill the form thoroughly</h6>
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
                         <div class="form-group">
-                            {{ form.patient_id.label(class="form-control-label") }}
-                            {% if form.patient_id.errors %}
-                                {{ form.patient_id(class="form-control form-control-lg is-invalid") }}
+                            {{ form.patient.label(class="form-control-label") }}
+                            {% if form.patient.errors %}
+                                {{ form.patient(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.patient_id.errors %}
+                                    {% for error in form.patient.errors %}
                                         <span>{{  error  }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.patient_id(class="form-control form-control-lg") }}
+                                {{ form.patient(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
-                        
                         <div class="form-group">
-                            {{ form.nurse_id.label(class="form-control-label") }}
-                            {% if form.nurse_id.errors %}
-                                {{ form.nurse_id(class="form-control form-control-lg is-invalid") }}
+                            {{ form.pres_type.label(class="form-control-label") }}
+                            {% if form.pres_type.errors %}
+                                {{ form.pres_type(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.nurse_id.errors %}
+                                    {% for error in form.pres_type.errors %}
                                         <span>{{  error  }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.nurse_id(class="form-control form-control-lg") }}
-                            {% endif %}
-
-                        </div>
-                        <div class="form-group">
-                            {{ form.room.label(class="form-control-label") }}
-                            {% if form.room.errors %}
-                                {{ form.room(class="form-control form-control-lg is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.room.errors %}
-                                        <span>{{  error  }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.room(class="form-control form-control-lg") }}
+                                {{ form.pres_type(class="form-control form-control-lg") }}
                             {% endif %}
 
                         </div>
                         <div class="form-group">
-                            {{ form.date.label(class="form-control-label") }}
-                            {% if form.date.errors %}
-                                {{ form.date(class="form-control form-control-lg is-invalid") }}
+                            {{ form.start_date.label(class="form-control-label") }}
+                            {% if form.start_date.errors %}
+                                {{ form.start_date(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.date.errors %}
+                                    {% for error in form.start_date.errors %}
                                         <span>{{  error  }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.date(class="form-control form-control-lg") }}
+                                {{ form.start_date(class="form-control form-control-lg") }}
                             {% endif %}
 
                         </div>
                         <div class="form-group">
-                            {{ form.time.label(class="form-control-label") }}
-                            {% if form.time.errors %}
-                                {{ form.time(class="form-control form-control-lg is-invalid") }}
+                            {{ form.end_date.label(class="form-control-label") }}
+                            {% if form.end_date.errors %}
+                                {{ form.end_date(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.time.errors %}
+                                    {% for error in form.end_date.errors %}
                                         <span>{{  error  }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.time(class="form-control form-control-lg") }}
+                                {{ form.end_date(class="form-control form-control-lg") }}
                             {% endif %}
 
                         </div>
                         <div class="form-group">
-                            {{ form.blood.label(class="form-control-label") }}
-                            {% if form.blood.errors %}
-                                {{ form.blood(class="form-control form-control-lg is-invalid") }}
+                            {{ form.pill.label(class="form-control-label") }}
+                            {% if form.pill.errors %}
+                                {{ form.pill(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.blood.errors %}
+                                    {% for error in form.pill.errors %}
                                         <span>{{  error  }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.blood(class="form-control form-control-lg") }}
+                                {{ form.pill(class="form-control form-control-lg") }}
                             {% endif %}
 
                         </div>
                         <div class="form-group">
-                            {{ form.report.label(class="form-control-label") }}
-                            {% if form.report.errors %}
-                                {{ form.report(class="form-control form-control-lg is-invalid") }}
+                            {{ form.diag.label(class="form-control-label") }}
+                            {% if form.diag.errors %}
+                                {{ form.diag(class="form-control form-control-lg is-invalid") }}
                                 <div class="invalid-feedback">
-                                    {% for error in form.report.errors %}
+                                    {% for error in form.diag.errors %}
                                         <span>{{  error  }}</span>
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.report(class="form-control form-control-lg") }}
+                                {{ form.diag(class="form-control form-control-lg") }}
                             {% endif %}
 
                         </div>

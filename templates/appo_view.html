@@ -13,12 +13,15 @@
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous">
-            <title>Test Results</title>
+
+        <title>Appointment View</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                
-            <a class="navbar-brand" href="home_p">MHRSAM</a>
+            <a class="navbar-brand" href="home_dr">
+                <i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i>
+            </a>
+            <a class="navbar-brand" href="home_dr">MHRSAM</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -33,32 +36,35 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item ">
-                        <a class="nav-link" href="home_p">Home
+                        <a class="nav-link" href="home_dr">Home
                             <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item justify-content-end">
-                            <a class="nav-link " href="prescriptions">Prescriptions</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="op_dr">Surgeries</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="blood_test">Blood Test</a>
+                    
+                    <li class="nav-item ">
+                        <a class="nav-link " href="patient_view">Patients</a>
                     </li>
                     <li class="nav-item">
-                            <a class="nav-link" href="make_appointment">Appointments</a>
-                        </li>
+                        <a class="nav-link" href="new_pres">Prescriptions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="appointment_view">Appointments</a>
+                    </li>
                 </ul>
                 <nav class="navbar navbar-dark bg-dark justify-content-end">
-                        <form class="form-inline">
-                            <a class="nav-link " href="account_update">
-                                <button class="btn btn-secondary" type="button">Account</button>
-                            </a>
-    
-                            <a class="nav-link " href="sign_out">
-                                <button class="btn btn-secondary" type="button">Sign Out</button>
-                            </a>
-    
-                        </form>
-                    </nav>
-                
+                    <form class="form-inline">
+                        <a class="nav-link " href="account_update_dr">
+                            <button class="btn btn-secondary" type="button">Account</button>
+                        </a>
+                        <a class="nav-link " href="sign_out">
+                            <button class="btn btn-secondary" type="button">Sign Out</button>
+                        </a>
+
+                    </form>
+                </nav>
+
             </div>
         </nav>
 
@@ -75,40 +81,23 @@
                 {% endwith %}
             </div>
             <div class="jumbotron" style="margin-top:10%;margin-bottom:10%;">
-                <div>
-                    <h1>Blood Tests</h1>
-                </div>
-                    
+                                       
                     <table class="table table-hover" style = "margin-top:5%;">
                         <thead>
                           <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Doctor</th>
-                            <th scope="col">Liver Function</th>
-                            <th scope="col">Thyroid Function</th>
-                            <th scope="col">Genetic</th>
-                            <th scope="col">Electrolyte</th>
-                            <th scope="col">Coagulation</th>
-                            <th scope="col">Blood Gas</th>
-                            <th scope="col">Blood Glucose</th>                            
-                            <th scope="col">Blood Culture</th>
-                            <th scope="col">Full Blood Count</th>
+                            <th scope="col">Patient ID</th>
+                            <th scope="col">Patient Name</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
                           </tr>
                         </thead>
                         <tbody>
-                            {% for t in table %}
+                            {% for i in range(0,len) %}
                                 <tr>
-                                    <td scope="col">{{t[0]}}</td>
-                                    <td scope="col">{{dr}}</td>
-                                    <td scope="col">{{t[3]}}</td>
-                                    <td scope="col">{{t[4]}}</td>
-                                    <td scope="col">{{t[5]}}</td>
-                                    <td scope="col">{{t[6]}}</td>
-                                    <td scope="col">{{t[7]}}</td>
-                                    <td scope="col">{{t[8]}}</td>
-                                    <td scope="col">{{t[9]}}</td>
-                                    <td scope="col">{{t[10]}}</td>
-                                    <td scope="col">{{t[11]}}</td>
+                                    <td scope="col">{{appo[i][0]}}</td>
+                                    <td scope="col">{{names[i]}}</td>
+                                    <td scope="col">{{appo[i][2]}}</td>
+                                    <td scope="col">{{appo[i][3]}}</td>
                                 </tr>
                             {% endfor %}
                           

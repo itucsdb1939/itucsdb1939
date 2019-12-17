@@ -14,12 +14,11 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous">
 
-        <title>HOME</title>
+        <title>View Prescriptions</title>
     </head>
     <body>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="home"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i></a>
-                    <a class="navbar-brand" href="home">MHRSAM</a>
+                    <a class="navbar-brand" href="home_dr">MHRSAM</a>
                     <button
                         class="navbar-toggler"
                         type="button"
@@ -34,7 +33,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item ">
-                                <a class="nav-link" href="home">Home
+                                <a class="nav-link" href="home_dr">Home
                                     <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
@@ -47,7 +46,9 @@
                         </ul>
                         <nav class="navbar navbar-dark bg-dark justify-content-end">
                                 <form class="form-inline">
-            
+                                    <a class="nav-link " href="/account_update_dr">
+                                        <button class="btn btn-secondary" type="button">Account</button>
+                                    </a>
                                     <a class="nav-link " href="sign_out">
                                         <button class="btn btn-secondary" type="button">Sign Out</button>
                                     </a>
@@ -72,7 +73,6 @@
             </div>
             <div class="jumbotron" style="margin-top:10%;margin-bottom:10%;">
                     
-                    
                     <table class="table table-hover" style = "margin-top:5%;">
                         <thead>
                           <tr>
@@ -83,6 +83,8 @@
                             <th scope="col">Starting Date</th>
                             <th scope="col">Ending Date</th>
                             <th scope="col">Pills</th>
+                            <th scope="col">    </th>
+                            <th scope="col">    </th>
                           </tr>
                         </thead>
                         <tbody>
@@ -95,6 +97,8 @@
                                     <td scope="col">{{p[4]}}</td>
                                     <td scope="col">{{p[5]}}</td>
                                     <td scope="col">{{p[6]}}</td>
+                                    <td scope="col"><a href="/patient_view/prescription/update/{{p[0]}}"><button type="button" class="btn btn-info">Update</button></a></td>
+                                    <td scope="col"><a href="/patient_view/prescription/delete/{{p[0]}}"><button type="button" class="btn btn-danger">Delete</button></a></td>
                                 </tr>
                             {% endfor %}
                           
@@ -104,7 +108,7 @@
         </div>
         <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
                 <div class="container text-center">
-                  <small>Copyright &copy; Your Website</small>
+                  <small>Copyright &copy; itu1939</small>
                 </div>
               </footer>
 

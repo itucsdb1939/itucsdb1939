@@ -14,7 +14,7 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
             crossorigin="anonymous">
 
-        <title>New Surgery</title>
+        <title>Update Surgery</title>
     </head>
     <body >
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -49,12 +49,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="appointment_view">Appointments</a>
                             </li>
+
                         </ul>
                         <nav class="navbar navbar-dark bg-dark justify-content-end">
                                 <form class="form-inline">
                                     <a class="nav-link " href="account_update_dr">
                                         <button class="btn btn-secondary" type="button">Account</button>
                                     </a>
+            
                                     <a class="nav-link " href="sign_out">
                                         <button class="btn btn-secondary" type="button">Sign Out</button>
                                     </a>
@@ -78,23 +80,9 @@
                 {% endwith %}
             </div>
             <div class="jumbotron" style="margin-top:10%;margin-bottom:10%;">
-                    <div>
-                            <ul class="nav nav-tabs">
-                                    <li class="nav-item">
-                                      <a class="nav-link active" href="op_dr">New</a>
-                                    </li>
-                                    <li class="nav-item">
-                                      <a class="nav-link " href="op_view">View</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link " href="update_op">Update</a>
-                                      </li>
-                                      <li class="nav-item">
-                                        <a class="nav-link " href="op_delete">Delete</a>
-                                      </li>
-                                  </ul>
-                    </div>
-                <h1 class="display-6" style="margin-bottom: 3%;margin-top: 2%;">Add new surgery</h1>
+                
+                <h1 class="display-6" style="margin-bottom: 3%;margin-top: 2%;">Update surgery</h1>
+                <h6>Please fill the form thoroughly</h6>
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
