@@ -44,7 +44,7 @@ INIT_STATEMENTS = [
     """,
     """
     CREATE TABLE IF NOT EXISTS surgery(
-        id BIGINT PRIMARY KEY NOT NULL,
+        id BIGSERIAL PRIMARY KEY NOT NULL,
         patient_id BIGINT REFERENCES person(tc) ON DELETE RESTRICT ON UPDATE CASCADE,
         doctor_id BIGINT REFERENCES doctor(tc) ON DELETE RESTRICT ON UPDATE CASCADE,
         nurse_id BIGINT REFERENCES nurse(tc) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -100,6 +100,7 @@ INIT_STATEMENTS = [
     """,
     """
     CREATE TABLE IF NOT EXISTS all_appoinments(
+        dep TEXT NOT NULL,
         doctor_id BIGINT REFERENCES doctor(tc) ON DELETE RESTRICT ON UPDATE CASCADE,
         date TEXT NOT NULL,
         time TEXT NOT NULL
