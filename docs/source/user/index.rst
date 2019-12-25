@@ -2,7 +2,7 @@ User Guide
 ==========
 
 **Welcome to MHRSAM user guide. Here, there will be information on 
-how to use our application.*
+how to use our application.**
 
 SIGN UP
 --------
