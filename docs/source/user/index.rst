@@ -17,7 +17,7 @@ SIGN UP
 Navigate to Register Page by clicking the *Sign Up* button on the top right
 corner of the page.
 
-.. figure:: signup.png
+.. figure:: signup.PNG
    :scale: 40 %
    :alt: Sign Up Page
    :align: center
@@ -49,7 +49,7 @@ LOGIN
 Navigate to Login Page by clicking the *Login* button on the top right
 corner of the page.
 
-.. figure:: login.png
+.. figure:: login.PNG
    :scale: 40 %
    :alt: Login Page
    :align: center
