@@ -4,7 +4,7 @@ User Guide
 **Welcome to MHRSAM user guide. Here, there will be information on 
 how to use our application.**
 
-SIGN UP
+Sign Up
 --------
 
 .. figure:: home_signup.png
@@ -36,7 +36,7 @@ You should fill the necessary areas with the correct information. After that, cl
 
 If you already have an account you can access the Login Page by clicking the link below.
 
-LOGIN
+Login
 -----
 
 .. figure:: home_login.png
@@ -68,7 +68,7 @@ access your account.
 
 If you don't have an account you can access the Signt Up Page by clicking the link below.
 
-.. toctree::
-
-   buket
-   seda   
+PATIENT
+-------
+Home
+^^^^
