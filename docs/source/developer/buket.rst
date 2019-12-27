@@ -71,7 +71,7 @@ Doctor
         submit = SubmitField('Login')
         
 
-3. Adding
+3. Add
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -347,7 +347,7 @@ Surgery
         
 
 
-3. Insert
+3. Add
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -555,7 +555,7 @@ Person
         return render_template("login.html", form = form)
 
 
-3. Insert
+3. Add
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -601,7 +601,6 @@ Person
 
 4. Update
 ~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 
 .. code-block:: python

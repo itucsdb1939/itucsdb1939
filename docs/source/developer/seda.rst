@@ -86,7 +86,7 @@ Nurse
         submit = SubmitField('Login')
     
 
-3. Adding
+3. Add
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -257,7 +257,7 @@ Test
             )
 
 
-3. Read
+2. Read
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
@@ -280,7 +280,7 @@ Test
 
 
 
-3. Adding
+3. Add
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -483,7 +483,7 @@ Prescription
 
 
 
-3. Adding
+3. Add
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
