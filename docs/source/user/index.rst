@@ -110,6 +110,7 @@ This is your homepage. You can access various pages using links in this page.
    Home Page
 
 On your your home page you can see links to;
+
    * *Prescriptions*
    * *Tests*
    * *Appointments*        pages.
@@ -159,7 +160,7 @@ You can navigate through navigation bar to home or any other page.
 
 If you want to make an appointment you can click to *Appointments* link to access the appoinment page. 
 
-.. figure:: appo.png
+.. figure:: appo.PNG
    :scale: 40 %
    :alt: Appointments Page
    :align: center
@@ -317,7 +318,7 @@ You can access surgery page by simply clicking the *Surgeries* link.
    :alt: Surgery Page
    :align: center
 
-  Surgery Page
+   Surgery Page
 
 Here, you will see a list of all the surgeries you are assigned to.
 
@@ -334,7 +335,7 @@ You can access test page by simply clicking the *Tests* link.
    :alt: Tests Page
    :align: center
 
-  Tests Page
+   Tests Page
 
 Here, you can add the results of the patients blood tests to the system. Fill the form with correct information and click the *Enter* button.
 
