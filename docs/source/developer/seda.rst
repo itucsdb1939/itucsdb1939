@@ -464,6 +464,7 @@ Prescription
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
+
     @app.route("/patient_view/prescription/<pres>", methods=['GET', 'POST'])
     def pres_view(pres):
         prescriptions = []
