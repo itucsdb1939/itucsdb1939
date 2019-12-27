@@ -1,26 +1,39 @@
 Developer Guide
 ===============
 
-Database Design
----------------
 
-**explain the database design of your project**
 
-**include the E/R diagram(s)**
 
-Code
-----
+**E/R diagram**
 
-**explain the technical structure of your code**
+.. image:: er.jpg
+	:scale: 40 %
+	:alt: E/R Chart
+	:align: center
 
-**to include a code listing, use the following example**::
+**Database Initialization for HEROKU**
 
-   .. code-block:: python
+Since we are using Heroku for deployment, we need to set the database up accordingly. The code block below
+descripes how our system is initialized. **DATABASE_URL** is inside the Heroku server and it is generated automatically
+by Heroku. 
 
-      class Foo:
+.. code-block:: python
 
-         def __init__(self, x):
-            self.x = x
+   def initialize(url):
+      with dbapi2.connect(url) as connection:
+         cursor = connection.cursor()
+         for statement in INIT_STATEMENTS:
+               cursor.execute(statement)
+         cursor.close()
+
+
+   if __name__ == "__main__":
+      url = os.getenv("DATABASE_URL")
+      if url is None:
+         print("Usage: DATABASE_URL=url python dbinit.py", file=sys.stderr)
+         sys.exit(1)
+      initialize(url)
+
 
 .. toctree::
 
